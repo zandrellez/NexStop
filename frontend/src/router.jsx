@@ -1,23 +1,18 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
-import Signin from './sample/Signin_sample.jsx';
-import RecommendForm from './sample/recommend_sample.jsx';
+import Signin from './sample/Signin.jsx';
+import Signup from './sample/Signup.jsx';
 
 export const router = createBrowserRouter([
   {
-    path: '/',
-    element: <App />,
-  },
-  {
-    path: '/dashboard',
-    element: <><h1>Dashboard Page</h1></>,
-  },
-  {
-    path: '/signin',
+    path: '/signin', 
     element: <Signin />,
   },
   {
-    path: '/recommend',
-    element: <RecommendForm />,
+    path: '/signup',
+    element: <Signup />,
+  },
+  {
+    path: '/dashboard',
+    element: <div><h1>Admin Dashboard</h1></div>,
   }
 ]);

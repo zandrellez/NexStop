@@ -1,0 +1,62 @@
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.auth-brand-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.brand-title {
+  font-size: 3rem;
+  margin-top: 1rem;
+  color: #1e293b;
+}
+
+.auth-form-side {
+  flex: 2;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d1c4e9 100%); /* Matches your design gradient */
+  border-radius: 40px 40px 0 0;
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .auth-container { flex-direction: row; }
+  .auth-brand-side { flex: 1; }
+  .auth-form-side { 
+    flex: 1; 
+    border-radius: 60px 0 0 60px; /* Rounded left side for desktop */
+    align-items: center;
+  }
+}
+
+.form-card { width: 100%; max-width: 380px; }
+.input-group { margin-bottom: 1.2rem; }
+.input-group label { display: block; font-weight: 500; margin-bottom: 0.4rem; }
+.input-group input { 
+  width: 100%; 
+  padding: 0.8rem; 
+  border-radius: 12px; 
+  border: 1px solid #cbd5e1; 
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+.error-msg { color: #ef4444; margin-top: 1rem; text-align: center; }
