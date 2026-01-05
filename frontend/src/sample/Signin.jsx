@@ -1,30 +1,38 @@
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { useState } from 'react';
+import {useActionState} from 'react';
 import './SignIn.css';
 
 const Signin = () => {
   const navigate = useNavigate();
   const { signInUser } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const formData = new FormData(e.target);
-    const { success, error: signInError } = await signInUser(
-      formData.get('email'),
-      formData.get('password')
+    const [error, submitAction, isPending] = useActionState(
+  
+      async(previousState, formData) => {
+          const email = formData.get('email');
+          const password = formData.get('password');
+       
+          const {
+            success,
+            data,
+            error: signInError,
+          } = await signInUser(email, password);
+  
+          if (signInError){
+            return new Error(signInError)
+          }
+  
+          if (success && data?.session) {
+            navigate('/dashboard');
+            return null;
+          }
+          
+          return null;
+      },
+  
+      null
+  
     );
-
-    if (success) {
-      navigate('/dashboard');
-    } else {
-      setError(signInError);
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="auth-container">
@@ -38,7 +46,7 @@ const Signin = () => {
           <h2>Log in</h2>
           <p className="switch-text">Don't have an account? <Link to="/signup">Sign up</Link></p>
           
-          <form onSubmit={handleSubmit}>
+          <form action={submitAction} aria-label="Sign in form" aria-describedby="form-description">
             <div className="input-group">
               <label>Email address</label>
               <input type="email" name="email" placeholder="helloworld@gmail.com" required />
@@ -49,8 +57,8 @@ const Signin = () => {
             </div>
             <p className="forgot-link"><Link to="#">Forgot password?</Link></p>
             
-            <button type="submit" className="primary-btn" disabled={loading}>
-              {loading ? 'Logging in...' : 'Log in'}
+            <button type="submit" className="primary-btn" disabled={isPending}>
+              {isPending ? 'Logging in...' : 'Log in'}
             </button>
           </form>
           {error && <p className="error-msg">{error}</p>}
