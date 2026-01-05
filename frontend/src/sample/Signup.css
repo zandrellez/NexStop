@@ -1,0 +1,79 @@
+
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.auth-brand-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.logo-img {
+  width: 200px; 
+  height: auto;
+}
+
+.brand-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.brand-title {
+  font-size: 3rem;
+  margin-top: 1rem;
+  color: #1e293b;
+  font-weight: 800;
+}
+
+.auth-form-side {
+  flex: 2;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d1c4e9 100%);
+  border-radius: 40px 40px 0 0;
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .auth-container { flex-direction: row; }
+  .auth-brand-side { flex: 1; }
+  .auth-form-side { 
+    flex: 1; 
+    border-radius: 60px 0 0 60px;
+    align-items: center;
+    height: 100vh;
+    overflow-y: auto; 
+  }
+}
+
+.form-card { width: 100%; max-width: 380px; }
+.switch-text { margin-bottom: 2rem; color: #64748b; }
+.input-group { margin-bottom: 1.2rem; text-align: left; }
+.input-group label { display: block; font-weight: 500; margin-bottom: 0.4rem; }
+.input-group input { 
+  width: 100%; 
+  padding: 0.8rem; 
+  border-radius: 12px; 
+  border: 1px solid #cbd5e1; 
+  box-sizing: border-box;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
