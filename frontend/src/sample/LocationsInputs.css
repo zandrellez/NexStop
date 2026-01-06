@@ -88,6 +88,9 @@
   margin-bottom: 10px;
 }
 
+.primary-btn:hover, .secondary-btn:hover {
+  opacity: 0.9;
+}
 
 /* Input Form Styles */
 .custom-select {
@@ -115,8 +118,6 @@
   background-color: #f5f5f5;
 }
 
-
-
 .location-banner div {
   display: flex;
   align-items: center;
@@ -124,7 +125,6 @@
   width: 32px;
   height: 32px;
 }
-
 
 .top-card {
   position: absolute;
