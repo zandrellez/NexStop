@@ -2,6 +2,12 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Signin from './sample/Signin.jsx';
 import Signup from './sample/Signup.jsx';
 import LocationPermission from './sample/LocationPermission.jsx';
+<<<<<<< HEAD
+
+
+// import RecommendForm from '/sample/recommend_sample.jsx';
+=======
+>>>>>>> df64c14394968d45cdd804af124807cea18fc811
 import AdminDashboard from './sample/AdminDashboard.jsx';
 import RecommendForm from './sample/recommend_sample.jsx';
 import WaitingScreen from './sample/WaitingScreen.jsx';

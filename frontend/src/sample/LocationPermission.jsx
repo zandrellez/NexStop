@@ -13,7 +13,13 @@ const LocationPermission = () => {
     setView('trip_forms');
   };
 
+  const handleDeny = () => {
+    setView('deny_message');
+  };
 
+  const handleBackToPermission = () => {
+  setView('permission');
+  };
 
   return (
     <div className="app-container">
@@ -28,10 +34,53 @@ const LocationPermission = () => {
           </div>
           <div className="button-group">
             <button className="primary-btn" onClick={handleAllow}> Allow</button>
-            <button className="secondary-btn">Don't allow</button>
+            <button className="secondary-btn" onClick={handleDeny}> Don't allow</button>
           </div>
         </div>
       )}
+
+      {/* --- VIEW: Deny Message Overlay --- */}
+{view === 'deny_message' && (
+  <>
+    {/* Keep permission background */}
+    <div className="overlay" style={{ background: 'rgba(255,255,255,0.2)' }}>
+      <div className="location-pin-container">
+        <img src="src/assets/pin-icon.png" alt="Pin" className="pin-icon" />
+        <h2 style={{ color: '#000', fontWeight: 'bold' }}>Enable Location</h2>
+      </div>
+      <div className="button-group">
+        <button className="primary-btn">Allow</button>
+        <button className="secondary-btn">Don't allow</button>
+      </div>
+    </div>
+
+    {/* Deny message box */}
+    <div
+      className="deny-message-box"
+      style={{
+        position: 'absolute',
+        top: '40%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        background: '#fff',
+        padding: '20px 24px',
+        borderRadius: '12px',
+        boxShadow: '0 8px 30px rgba(0,0,0,0.2)',
+        zIndex: 10,
+        textAlign: 'center',
+        width: '80%',
+        maxWidth: '300px'
+      }}
+    >
+      <p style={{ marginBottom: '20px', fontWeight: '600', color: '#333' }}>
+        Enable location to continue.
+      </p>
+      <button className="primary-btn" onClick={handleBackToPermission}>
+        OK
+      </button>
+    </div>
+  </>
+)}
 
       {/* --- VIEW 2: Location Home Screen --- */}
       {view === 'home' && (
