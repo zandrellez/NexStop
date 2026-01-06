@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { useActionState } from 'react';
-import './SignIn.css';
+import './Signin.css';
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Signin = () => {
         if (isAdmin) {
           navigate('/admin/dashboard');
         } else {
-          navigate('/dashboard');
+          navigate('/home');
         }
         return null;
       }
@@ -36,6 +36,33 @@ const Signin = () => {
     },
     null
   );
+
+  const socialSignIn = async () => {
+    //hardcoded credentials
+    try {
+      const {
+        success,
+        data,
+        isAdmin, 
+        error: signInError,
+      } = await signInUser('user@gmail.com', 'password');
+
+      if (signInError) {
+        return new Error(signInError);
+      }
+
+      if (success && data?.session) {
+        if (isAdmin) {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/dashboard');
+        }
+      }
+    } catch (error) {
+      console.error('Social sign-in error:', error.message);
+      return new Error('An unexpected error occurred during social sign-in. Please try again.');
+    }
+  }
 
   const handleGuestMode = () => {
     navigate('/location-permission'); 
@@ -87,13 +114,13 @@ const Signin = () => {
           </div>
 
           <div className="social-icons-row">
-            <button className="social-btn" type="button">
+            <button className="social-btn" type="button" onClick={socialSignIn}>
               <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg" alt="Facebook" />
             </button>
-            <button className="social-btn" type="button">
+            <button className="social-btn" type="button" onClick={socialSignIn}>
               <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_Logo.svg" alt="Google" />
             </button>
-            <button className="social-btn" type="button">
+            <button className="social-btn" type="button" onClick={socialSignIn}>
               <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" />
             </button>
           </div>

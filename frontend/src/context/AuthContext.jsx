@@ -1,123 +1,141 @@
-import { createContext, useState, useContext, useEffect } from 'react';
-import supabase from '../supabase-client';
+import { createContext, useEffect, useState } from "react";
+import supabase from "../supabase-client";
 
-const AuthContext = createContext();
+const AuthContext = createContext(null);
 
 export const AuthContextProvider = ({ children }) => {
-//Auth functions (signin, signup, logout)
-
-//Session state (user info, sign-in status)
-  const [session, setSession] = useState(undefined);
+  // Session state (user info, sign-in status)
+  const [session, setSession] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getInitialSession() {
+    // ✅ Get initial session (FIXED)
+    const getInitialSession = async () => {
       try {
-        const {data, error} = await supabase.auth.getSession(session);
-        
-        if (error) {
-          throw error;
-        }
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
 
-        console.log(data.session);
-        setSession(data.session);
+        if (error) throw error;
+
+        setSession(session);
       } catch (error) {
-        console.error('Error authenticating:', error);
+        console.error("Error authenticating:", error.message);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
     getInitialSession();
 
-    supabase.auth.onAuthStateChange((_event, session) => {
+    // ✅ Properly handle auth state changes + cleanup
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      console.log('Session changed:', session);
-    })
+      console.log("Session changed:", session);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
+
+  // ================= AUTH FUNCTIONS =================
 
   const signUpUser = async (email, password) => {
     try {
-      const {data, error} = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: email.toLowerCase(),
-        password: password,
+        password,
       });
+
       if (error) {
-        console.error('Supabase sign-up error:', error.message);
-        return {success: false, error: error.message};
-      }
-      console.log("Supabase sign-up success", data);
-      return {success: true, data};
-    }
-    catch (error) {
-      console.error('Unexpected error during sign-up:', error.message);
-      return { success: false, error: 'An unexpected error occurred. Please try again.' };
-    }
-  }
-
-  const signInUser = async (email, password) => {
-    try {
-      const {data, error} = await supabase.auth.signInWithPassword({
-        email: email.toLowerCase(),
-        password: password,
-      })
-      if (error) {
-        console.error('Supabase sign-in error:', error.message)
-        return {success: false, error: error.message}
+        return { success: false, error: error.message };
       }
 
-      const adminAccounts = await fetchAdminAccounts();
-      console.log('Fetched admin accounts:', adminAccounts);
-      const isAdmin = adminAccounts.some((account) => account.email === email.toLowerCase());
-
-      if (isAdmin) {
-        return {success: true, data, isAdmin: true};
-      } else {
-        return {success: true, data, isAdmin: false};
-      }
+      return { success: true, data };
     } catch (error) {
-      console.error('Unexpected error during sign-in:', error.message);
-      return { success: false, error: 'An unexpected error occurred. Please try again.' };
+      console.error("Unexpected error during sign-up:", error.message);
+      return {
+        success: false,
+        error: "An unexpected error occurred. Please try again.",
+      };
     }
-  }
+  };
 
   const fetchAdminAccounts = async () => {
     try {
       const { data, error } = await supabase
-        .from('admins')
-        .select('email')
+        .from("admins")
+        .select("email");
+
       if (error) {
-        console.error('Error fetching admin accounts:', error.message);
+        console.error("Error fetching admin accounts:", error.message);
         return [];
       }
-      return data;
+
+      return data ?? [];
     } catch (error) {
-      console.error('Unexpected error fetching admin accounts:', error.message);
+      console.error("Unexpected error fetching admin accounts:", error.message);
       return [];
     }
   };
-  
-  const signOut = async () => {
+
+  const signInUser = async (email, password) => {
     try {
-      const {error} = await supabase.auth.signOut();
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.toLowerCase(),
+        password,
+      });
 
       if (error) {
-        console.error('Supabase sign-out error:', error.message);
+        return { success: false, error: error.message };
+      }
+
+      const adminAccounts = await fetchAdminAccounts();
+      const isAdmin = adminAccounts.some(
+        (account) => account.email === email.toLowerCase()
+      );
+
+      return { success: true, data, isAdmin };
+    } catch (error) {
+      console.error("Unexpected error during sign-in:", error.message);
+      return {
+        success: false,
+        error: "An unexpected error occurred. Please try again.",
+      };
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+
+      if (error) {
         return { success: false, error: error.message };
       }
 
       return { success: true };
-
     } catch (error) {
-      console.error('Error signing out:', error.message);
+      console.error("Error signing out:", error.message);
       return { success: false, error: error.message };
     }
-  }
+  };
 
   return (
-    <AuthContext.Provider value={{ session, signInUser, signOut, signUpUser }}>
+    <AuthContext.Provider
+      value={{
+        session,
+        loading,
+        signInUser,
+        signOut,
+        signUpUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};

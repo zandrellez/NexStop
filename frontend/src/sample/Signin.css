@@ -260,10 +260,13 @@
     padding: 2rem 1rem;
   }
   .brand-title {
-    font-size: 2.5rem;
+    display: none; /* Hide title on mobile */
   }
   .brand-tagline {
-    font-size: 0.8rem;
+    display: none; /* Hide tagline on mobile */
+  }
+  .logo-img {
+    width: 150px; /* Slightly smaller logo for mobile */
   }
   .auth-form-side {
     padding: 2rem 1.5rem;

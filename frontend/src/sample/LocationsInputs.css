@@ -1,3 +1,12 @@
+:root {
+  /* Transit-themed branding variables (aligned with SignIn and AdminDashboard) */
+  --primary-brand: #1565c0; /* Deep blue for trust */
+  --text-main: #263238; /* Darker for readability */
+  --white-glass: rgba(255, 255, 255, 0.8); /* Slightly more opaque for sharpness */
+  --border-light: rgba(0, 0, 0, 0.1); /* Subtle borders */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08); /* Softer shadows */
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -10,6 +19,47 @@
   background-color: #ffffff;
   overflow: hidden;
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  font-family: 'Inter', system-ui, sans-serif;
+  padding-top: 2rem;
+}
+
+/* Header with Logo and Back Button */
+.app-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20; /* Above overlays */
+  display: flex;
+  justify-content: flex-start; /* Group logo and back on the left */
+  align-items: center;
+  gap: 1rem; /* Space between logo and back button */
+  padding: 1rem 1.5rem;
+  background: var(--white-glass);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-soft);
+}
+
+.header-logo {
+  width: 50px;
+  height: auto;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: var(--primary-brand);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem; /* Larger for touch */
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(21, 101, 192, 0.1);
 }
 
 /* Background Map Placeholder */
@@ -34,6 +84,7 @@
   flex-direction: column;
   padding: 20px;
   box-sizing: border-box;
+  padding-top: 80px; /* Account for header height */
 }
 
 .location-pin-container {
@@ -88,10 +139,13 @@
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
 .primary-btn:hover, .secondary-btn:hover {
   opacity: 0.9;
 }
 
+=======
+>>>>>>> eee69ec2f7d54dd396d10c31d6d65fe3b2617121
 /* Input Form Styles */
 .custom-select {
   width: 100%;
@@ -128,7 +182,7 @@
 
 .top-card {
   position: absolute;
-  top: 20px;
+  top: 80px; /* Below header */
   left: 20px;
   right: 20px;
   background: white;
@@ -146,7 +200,6 @@
   cursor: pointer;
   transition: background 0.2s;
 }
-
 
 .location-option:hover {
   background-color: #f9f9f9;
@@ -169,7 +222,6 @@
   justify-content: center;
 }
 
-
 /* Inner dot for 'Use my location' */
 .dot-filled::after {
   content: "";
@@ -178,7 +230,6 @@
   background: white;
   border-radius: 50%;
 }
-
 
 .dot-outline {
   width: 18px;
@@ -193,8 +244,6 @@
   border-top: 1px solid #f0f0f0;
   margin: 0;
 }
-
-
 
 /* --- Map Marker Center --- */
 .map-marker-center {
@@ -216,7 +265,6 @@
   z-index: 2;
 }
 
-
 /* Desktop Responsiveness */
 @media (min-width: 768px) {
   body {
@@ -228,5 +276,33 @@
     margin-top: 5vh;
     border-radius: 30px;
   }
+
+  .header-logo {
+    width: 60px;
+  }
+
+  .back-btn {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.25rem;
+  }
 }
 
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .header-logo {
+    width: 40px;
+  }
+
+  .back-btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .overlay {
+    padding-top: 70px; /* Adjust for smaller header */
+  }
+
+  .top-card {
+    top: 70px;
+  }
+}
