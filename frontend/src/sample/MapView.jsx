@@ -5,7 +5,7 @@ import { getDistanceKm } from "../utils/geo";
 
 const TOMTOM_KEY = import.meta.env.VITE_TOMTOM_API_KEY;
 
-export default function MapView({ center, userLocation, corridor, traffic, className }) {
+export default function MapView({ center, userLocation, corridor, traffic }) {
   const mapRef = useRef(null);
   const map = useRef(null);
   const userMarker = useRef(null);
@@ -147,6 +147,7 @@ export default function MapView({ center, userLocation, corridor, traffic, class
           corridor.center.lat,
           corridor.center.lng
         ).toFixed(2);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setDistanceKm(distance);
       }
 

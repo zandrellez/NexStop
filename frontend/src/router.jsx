@@ -6,7 +6,7 @@ import LocationPermission from './sample/LocationPermission.jsx';
 import AdminDashboard from './sample/AdminDashboard.jsx';
 import RecommendForm from './sample/recommend_sample.jsx';
 import WaitingScreen from './sample/WaitingScreen.jsx';
-import GoScreen from './sample/GoScreen.jsx';
+import GoScreen from './sample/GoScreen.jsx'; 
 import FeedbackScreen from './sample/FeedbackScreen.jsx';
 
 
