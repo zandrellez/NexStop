@@ -64,14 +64,37 @@ export const AuthContextProvider = ({ children }) => {
         return {success: false, error: error.message}
       }
 
-      console.log("Supabase sign-in success", data);
-      return {success: true, data};
+      const adminAccounts = await fetchAdminAccounts();
+      console.log('Fetched admin accounts:', adminAccounts);
+      const isAdmin = adminAccounts.some((account) => account.email === email.toLowerCase());
+
+      if (isAdmin) {
+        return {success: true, data, isAdmin: true};
+      } else {
+        return {success: true, data, isAdmin: false};
+      }
     } catch (error) {
       console.error('Unexpected error during sign-in:', error.message);
       return { success: false, error: 'An unexpected error occurred. Please try again.' };
     }
   }
 
+  const fetchAdminAccounts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('admins')
+        .select('email')
+      if (error) {
+        console.error('Error fetching admin accounts:', error.message);
+        return [];
+      }
+      return data;
+    } catch (error) {
+      console.error('Unexpected error fetching admin accounts:', error.message);
+      return [];
+    }
+  };
+  
   const signOut = async () => {
     try {
       const {error} = await supabase.auth.signOut();

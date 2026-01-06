@@ -37,6 +37,7 @@ const Signup = () => {
       <div className="auth-brand-side">
         <div className="brand-content">
           <img src="/src/assets/NSLogo.png" alt="Logo" className="logo-img" />
+          <h1 className="brand-title">NexStop</h1>
         </div>
       </div>
 

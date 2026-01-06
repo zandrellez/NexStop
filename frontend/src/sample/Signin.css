@@ -1,23 +1,33 @@
-
+/* Container & Layout */
 .auth-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #ffffff;
 }
 
+/* Branding (Left Side) */
 .auth-brand-side {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 3rem;
+  padding: 2rem;
+}
+
+.brand-content {
+  display: flex;
+  flex-direction: row; /* Matches mockup logo + text */
+  align-items: center;
+  gap: 15px;
 }
 
 .brand-title {
   font-size: 3rem;
-  margin-top: 1rem;
   color: #1e293b;
+  font-weight: 800;
 }
+
 
 .auth-form-side {
   flex: 2;
