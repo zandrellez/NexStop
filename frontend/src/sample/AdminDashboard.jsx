@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../supabase-client'; //
+import supabase from '../supabase-client';
 import './AdminDashboard.css';
 import logo from '../assets/NSLogo.png'; //
 
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
     const fetchDashboardData = async () => {
       // Requirement 3.2: Fetch sessions from the database
       // Using 'waiting_sessions' as defined in the Backend requirement
-      const { data, error } = await supabase
+      const { data, error: _ } = await supabase
         .from('waiting_sessions')
         .select('*')
         .order('created_at', { ascending: false });
