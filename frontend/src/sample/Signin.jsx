@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 import { useNavigate, Link } from 'react-router-dom';
 import { useActionState } from 'react';
-import './SignIn.css';
+import './Signin.css';
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Signin = () => {
         if (isAdmin) {
           navigate('/admin/dashboard');
         } else {
-          navigate('/dashboard');
+          navigate('/home');
         }
         return null;
       }
