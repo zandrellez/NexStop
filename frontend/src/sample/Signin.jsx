@@ -33,7 +33,7 @@ const Signin = () => {
   );
 
   const handleGuestMode = () => {
-    navigate('/dashboard'); 
+    navigate('/location-permission'); 
   };
 
   return (
