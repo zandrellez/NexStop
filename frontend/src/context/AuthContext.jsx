@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import supabase from "../supabase-client";
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   // Session state (user info, sign-in status)
@@ -139,3 +139,6 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
+export const useAuth = () => { 
+  return useContext(AuthContext); 
+};
