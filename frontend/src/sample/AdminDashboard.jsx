@@ -28,34 +28,45 @@ const AdminDashboard = () => {
   // Close sidebar when clicking outside or on a nav item (mobile)
   const closeSidebar = () => setIsSidebarOpen(false);
 
-  useEffect(() => {
+useEffect(() => {
     const fetchDashboardData = async () => {
-      // Requirement 3.2: Fetch sessions from the database
-      // Using 'waiting_sessions' as defined in the Backend requirement
-      const { data, error: _ } = await supabase
-        .from('waiting_sessions')
-        .select('*')
-        .order('created_at', { ascending: false });
+      try {
+        // Fetch sessions from the database
+        const { data, error } = await supabase
+          .from('logs')
+          .select()
 
-      if (data) {
-        setSessions(data);
-        
-        // Requirement 3.3: Analytics Calculation
-        const total = data.length;
-        if (total > 0) {
-          const totalActualWait = data.reduce((acc, curr) => acc + (curr.actual_wait || 0), 0);
-          const followedCount = data.filter(s => s.outcome === s.recommendation).length;
-          const helpfulCount = data.filter(s => s.is_helpful).length;
-
-          setStats({
-            total,
-            avgWait: (totalActualWait / total).toFixed(1),
-            followRate: ((followedCount / total) * 100).toFixed(0),
-            helpfulRate: ((helpfulCount / total) * 100).toFixed(0)
-          });
+        if (error) {
+          throw error;
         }
+
+        if (data) {
+          setSessions(data);
+          console.log('Fetched admin data:', data);
+          // Analytics Calculation
+          const total = data.length;
+          if (total > 0) {
+            const totalWaitWindow = data.reduce((acc, curr) => acc + (curr.wait_window || 0), 0);
+            const goCount = data.filter(s => s.recommended === 'GO').length;
+            // Calculate helpfulness as average confidence score
+            const totalConfidence = data.reduce((acc, curr) => acc + (curr.confidence || 0), 0);
+
+            setStats({
+              total,
+              avgWait: (totalWaitWindow / total).toFixed(1),
+              followRate: ((goCount / total) * 100).toFixed(0),
+              helpfulRate: (totalConfidence / total).toFixed(0)
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching dashboard data:', error);
+        // Optionally set an error state to show to the user
+        setSessions([]);
+        setStats({ avgWait: 0, followRate: 0, helpfulRate: 0, total: 0 });
       }
     };
+
     fetchDashboardData();
   }, []);
 
@@ -142,11 +153,11 @@ const AdminDashboard = () => {
                           <td>{new Date(s.created_at).toLocaleString()}</td>
                           <td>{s.corridor}</td>
                           <td>
-                            <span className={`badge ${s.recommendation?.toLowerCase()}`}>
-                              {s.recommendation}
+                            <span className={`badge ${s.recommended?.toLowerCase()}`}>
+                              {s.recommended}
                             </span>
                           </td>
-                          <td>{s.predicted_wait}m / {s.actual_wait}m</td>
+                          <td>{s.wait_window}m / {s.actual_wait}m</td>
                           <td>{s.outcome}</td>
                           <td>{s.is_helpful ? '✅ Helpful' : '❌ Unhelpful'}</td>
                         </tr>
