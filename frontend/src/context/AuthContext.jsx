@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import supabase from "../supabase-client";
 
 const AuthContext = createContext(null);
@@ -139,10 +139,3 @@ export const AuthContextProvider = ({ children }) => {
   );
 };
 
-// ✅ THIS FIXES YOUR VITE ERROR
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-export default AuthContext;
