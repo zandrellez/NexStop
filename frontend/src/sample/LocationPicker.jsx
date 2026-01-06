@@ -13,6 +13,7 @@ export default function LocationPicker() {
   const [center, setCenter] = useState(DEFAULT_CENTER);
   const [userLocation, setUserLocation] = useState(null);
   const [result, setResult] = useState(null);
+const [showOverlay, setShowOverlay] = useState(false);
 
   const handleResultChange = ({ traffic, wait }) => {
   setResult((prev) => ({
@@ -96,6 +97,7 @@ export default function LocationPicker() {
       setResult({ corridor, traffic, wait });
       setCenter(userLoc || corridor.points[0]);
       setStatus("done");
+      setShowOverlay(true);
     } catch (err) {
       console.error("Traffic fetch failed", err);
       setResult({ corridor, traffic: "UNKNOWN", wait: corridor.baseWait });
@@ -114,7 +116,12 @@ export default function LocationPicker() {
         traffic={result?.traffic}
       />
 
-      <InputForm result={result} status={status} onChange={handleResultChange} />
+      <InputForm
+  result={result}
+  status={status}
+  onChange={handleResultChange}
+/>
+
 
 
       {/* Manual corridor dropdown overlay */}
@@ -137,7 +144,7 @@ export default function LocationPicker() {
         </div>
       )}
 
-      {/* Status messages */}
+      {/* Status messages 
       {status === "loading" && (
         <div className="overlay-dropdown">
           Requesting location access…
@@ -147,7 +154,7 @@ export default function LocationPicker() {
         <div className="overlay-dropdown">
           Checking traffic…
         </div>
-      )}
+      )}*/}
 
       {/* Result panel at bottom 
       {result && status === "done" && (

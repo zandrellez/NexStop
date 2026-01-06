@@ -45,6 +45,19 @@ export default function MapView({ center, userLocation, corridor, traffic, class
             .catch((err) => console.warn("Traffic service failed", err));
         }
       });
+
+      // Handle window resize to resize the map
+      const handleResize = () => {
+        if (map.current) {
+          map.current.resize();
+        }
+      };
+      window.addEventListener('resize', handleResize);
+
+      // Cleanup
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }
 
     // --- USER MARKER ---
@@ -182,16 +195,17 @@ export default function MapView({ center, userLocation, corridor, traffic, class
   }, [center, userLocation, corridor, traffic]);
 
   return (
-    <div>
+    <div style={{ height: "100%", width: "100%" }}>
       <div
-        ref={mapRef}
-        className={className}
-        style={{
-          height: "90vh",
-          width: "100%",
-          borderRadius: "8px",
-        }}
-      />
+  ref={mapRef}
+  className="map-container"
+  style={{
+    height: "50vh", // adjust as needed; 50-60% of screen height
+    width: "100%",
+    borderRadius: "8px",
+  }}
+/>
+
       {distanceKm && (
         <p style={{ marginTop: "0.5rem" }}>
           Distance to corridor: {distanceKm} km
