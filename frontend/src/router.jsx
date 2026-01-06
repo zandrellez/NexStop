@@ -1,6 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Signin from './sample/Signin.jsx';
 import Signup from './sample/Signup.jsx';
+import WaitingScreen from './sample/WaitingScreen.jsx'; 
+import GoScreen from './sample/GoScreen.jsx';
+import FeedbackScreen from './sample/FeedbackScreen.jsx';
 // import RecommendForm from '/sample/recommend_sample.jsx';
 
 export const router = createBrowserRouter([
@@ -15,6 +18,18 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Signup />,
+  },
+  {
+    path: '/waiting',
+    element: <WaitingScreen />,
+  },
+  {
+    path: '/go',
+    element: <GoScreen />,
+  },
+  {
+    path: 'feedback',
+    element: <FeedbackScreen/>
   },
   // {
   //   path: '/recommend',
