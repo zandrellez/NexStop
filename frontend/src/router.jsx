@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Signin from './sample/Signin.jsx';
 import Signup from './sample/Signup.jsx';
+import Home from './sample/Home.jsx';
 import LocationPermission from './sample/LocationPermission.jsx';
 import AdminDashboard from './sample/AdminDashboard.jsx';
 import RecommendForm from './sample/recommend_sample.jsx';
@@ -21,6 +22,10 @@ export const router = createBrowserRouter([
   {
     path: '/signup',
     element: <Signup />,
+  },
+  {
+    path: '/home',
+    element: <Home />,
   },
   {
     path: '/location-permission',
