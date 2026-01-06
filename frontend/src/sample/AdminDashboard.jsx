@@ -1,4 +1,3 @@
-// src/components/Dashboard.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase from '../supabase-client';
@@ -15,12 +14,19 @@ const AdminDashboard = () => {
     helpfulRate: 0,
     total: 0 
   });
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // For mobile sidebar toggle
 
   // Requirement 3.1: Admin Logout functionality
   const handleLogout = async () => {
     await supabase.auth.signOut();
     navigate('/signin'); //
   };
+
+  // Toggle sidebar for mobile
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+
+  // Close sidebar when clicking outside or on a nav item (mobile)
+  const closeSidebar = () => setIsSidebarOpen(false);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -56,29 +62,41 @@ const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
       {/* Sidebar Navigation with Branding */}
-      <aside className="sidebar">
+      <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <div className="brand">
           <img src={logo} alt="NexStop Logo" className="brand-logo-small" />
           <div className="brand-name">NexStop</div>
+          <p className="brand-tagline">Optimizing Your Commute</p>
         </div>
         <nav>
           <button 
             className={activeTab === 'Overview' ? 'active' : ''} 
-            onClick={() => setActiveTab('Overview')}
+            onClick={() => { setActiveTab('Overview'); closeSidebar(); }}
           > Overview
           </button>
           <button 
             className={activeTab === 'User Logs' ? 'active' : ''} 
-            onClick={() => setActiveTab('User Logs')}
+            onClick={() => { setActiveTab('User Logs'); closeSidebar(); }}
           > User Logs
           </button>
-          <button className="logout-btn" onClick={handleLogout}>Logout</button>
+          <button className="logout-btn" onClick={() => { handleLogout(); closeSidebar(); }}>Logout</button>
         </nav>
       </aside>
+
+      {/* Overlay for mobile sidebar */}
+      {isSidebarOpen && <div className="sidebar-overlay" onClick={closeSidebar}></div>}
 
       {/* Main Content Area */}
       <main className="main-content">
         <header className="top-nav">
+          <button 
+            className="hamburger" 
+            onClick={toggleSidebar} 
+            aria-expanded={isSidebarOpen} 
+            aria-label="Toggle navigation menu"
+          >
+            ☰
+          </button>
           <h2>{activeTab} Analytics</h2>
         </header>
 

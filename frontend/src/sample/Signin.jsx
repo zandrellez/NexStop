@@ -72,8 +72,9 @@ const Signin = () => {
     <div className="auth-container">
       <div className="auth-brand-side">
         <div className="brand-content">
-          <img src="/src/assets/NSLogo.png" alt="Logo" className="logo-img" />
-          <h1 className="brand-title">NexStop</h1>
+          <img src="/src/assets/NSLogo.png" alt="NexStop Logo" className="logo-img" />
+          <div className="brand-title">NexStop</div>
+          <p className="brand-tagline">Optimizing Your Commute</p>
         </div>
       </div>
       <div className="auth-form-side">

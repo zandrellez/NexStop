@@ -1,9 +1,24 @@
+:root {
+  /* Transit-themed branding variables (aligned with AdminDashboard) */
+  --bg-gradient: linear-gradient(135deg, #e3f2fd 0%, #f1f8e9 100%); /* Light blue to light green */
+  --primary-brand: #1565c0; /* Deep blue for trust */
+  --accent-green: #2e7d32; /* Green for positive actions */
+  --accent-orange: #f57c00; /* Orange for warnings */
+  --white-glass: rgba(255, 255, 255, 0.8); /* Slightly more opaque for sharpness */
+  --border-light: rgba(0, 0, 0, 0.1); /* Subtle borders */
+  --text-main: #263238; /* Darker for readability */
+  --text-muted: #607d8b; /* Muted blue-gray */
+  --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.08); /* Softer shadows */
+}
+
 /* Container & Layout */
 .auth-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   background-color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text-main);
 }
 
 /* Branding (Left Side) */
@@ -17,34 +32,135 @@
 
 .brand-content {
   display: flex;
-  flex-direction: row; /* Matches mockup logo + text */
+  flex-direction: column; /* Stacked for better mobile alignment */
   align-items: center;
   gap: 15px;
+  text-align: center;
+}
+
+.logo-img {
+  width: 180px; /* Big logo fix */
+  height: auto;
 }
 
 .brand-title {
   font-size: 3rem;
-  color: #1e293b;
-  font-weight: 800;
+  color: var(--primary-brand);
+  font-weight: 900;
 }
 
+.brand-tagline {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  font-weight: 500;
+}
 
+/* Form Side */
 .auth-form-side {
   flex: 2;
-  background: linear-gradient(135deg, #e0f7fa 0%, #d1c4e9 100%); /* Matches your design gradient */
+  background: var(--bg-gradient); /* Updated to match transit theme */
   border-radius: 40px 40px 0 0;
   padding: 3rem 2rem;
   display: flex;
   justify-content: center;
 }
-/* Add to SignIn.css */
+
+/* Form Card with Glassmorphism */
+.form-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--white-glass);
+  backdrop-filter: blur(8px); /* Reduced blur for sharper look */
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  box-shadow: var(--shadow-soft);
+  padding: 2rem;
+}
+
+.form-card h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--primary-brand);
+  margin-bottom: 0.5rem;
+}
+
+.switch-text {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.switch-text a {
+  color: var(--primary-brand);
+  font-weight: 600;
+}
+
+/* Input Groups */
+.input-group {
+  margin-bottom: 1.2rem;
+}
+
+.input-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: var(--text-main);
+}
+
+.input-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  background: white;
+  font-size: 1rem;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--primary-brand);
+  box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.1);
+}
+
+.forgot-link {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.forgot-link a {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.primary-btn {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-brand);
+  color: #fff;
+  border-radius: 12px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.primary-btn:hover {
+  background: #0d47a1; /* Darker shade for hover */
+}
+
+.primary-btn:disabled {
+  background: var(--text-muted);
+  cursor: not-allowed;
+}
+
 .guest-btn {
   width: 100%;
   padding: 1rem;
-  background: #e2e8f0; /* Light gray to distinguish from main Log In */
-  color: #1e293b;
+  background: #e2e8f0; /* Light gray to distinguish */
+  color: var(--text-main);
   border-radius: 12px;
-  font-weight: bold;
+  font-weight: 700;
   border: none;
   cursor: pointer;
   margin-top: 10px;
@@ -55,67 +171,7 @@
   background: #cbd5e1;
 }
 
-.social-login {
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  margin-top: 10px;
-}
-
-.social-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  background: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* Layout & Logo */
-.auth-container {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.auth-brand-side {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 3rem;
-}
-
-.logo-img {
-  width: 180px; /* Big logo fix */
-  height: auto;
-}
-
-.brand-title {
-  font-size: 3rem;
-  margin-top: 1rem;
-  color: #1e293b;
-  font-weight: 800;
-}
-
-/* Form Styling */
-.auth-form-side {
-  flex: 2;
-  background: linear-gradient(135deg, #e0f7fa 0%, #d1c4e9 100%);
-  border-radius: 40px 40px 0 0;
-  padding: 3rem 2rem;
-  display: flex;
-  justify-content: center;
-}
-
-/* Divider Styling */
+/* Divider */
 .divider-container {
   display: flex;
   align-items: center;
@@ -125,16 +181,17 @@
 .divider-line {
   flex: 1;
   height: 1px;
-  background-color: #cbd5e1;
+  background-color: var(--border-light);
 }
 
 .divider-text {
   padding: 0 10px;
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 0.85rem;
+  font-weight: 500;
 }
 
-/* Social Buttons Styling */
+/* Social Buttons */
 .social-icons-row {
   display: flex;
   justify-content: center;
@@ -145,17 +202,18 @@
   width: 50px;
   height: 50px;
   border-radius: 12px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-light);
   background: white;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 
 .social-btn:hover {
   background: #f8fafc;
+  box-shadow: var(--shadow-soft);
 }
 
 .social-btn img {
@@ -163,69 +221,57 @@
   height: 24px;
 }
 
-/* Primary & Guest Buttons */
-.primary-btn {
-  width: 100%;
-  padding: 1rem;
-  background: #000;
-  color: #fff;
-  border-radius: 12px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-
-.guest-btn {
-  width: 100%;
-  padding: 1rem;
-  background: #e2e8f0;
-  color: #1e293b;
-  border-radius: 12px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  margin-top: 10px;
+/* Error Message */
+.error-msg {
+  color: #d32f2f; /* Red for errors */
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
 }
 
 /* Desktop Styles */
 @media (min-width: 768px) {
-  .auth-container { flex-direction: row; }
-  .auth-brand-side { flex: 1; }
-  .auth-form-side { 
-    flex: 1; 
-    border-radius: 60px 0 0 60px;
-    align-items: center;
+  .auth-container {
+    flex-direction: row;
   }
-}
-/* Desktop Styles */
-@media (min-width: 768px) {
-  .auth-container { flex-direction: row; }
-  .auth-brand-side { flex: 1; }
-  .auth-form-side { 
-    flex: 1; 
+  .auth-brand-side {
+    flex: 1;
+  }
+  .auth-form-side {
+    flex: 1;
     border-radius: 60px 0 0 60px; /* Rounded left side for desktop */
     align-items: center;
   }
+  .brand-content {
+    flex-direction: row; /* Logo + text side-by-side on desktop */
+    gap: 20px;
+  }
+  .brand-title {
+    font-size: 3.5rem;
+  }
+  .brand-tagline {
+    font-size: 1rem;
+  }
 }
 
-.form-card { width: 100%; max-width: 380px; }
-.input-group { margin-bottom: 1.2rem; }
-.input-group label { display: block; font-weight: 500; margin-bottom: 0.4rem; }
-.input-group input { 
-  width: 100%; 
-  padding: 0.8rem; 
-  border-radius: 12px; 
-  border: 1px solid #cbd5e1; 
+/* Mobile Adjustments */
+@media (max-width: 767px) {
+  .auth-brand-side {
+    padding: 2rem 1rem;
+  }
+  .brand-title {
+    font-size: 2.5rem;
+  }
+  .brand-tagline {
+    font-size: 0.8rem;
+  }
+  .auth-form-side {
+    padding: 2rem 1.5rem;
+  }
+  .form-card {
+    padding: 1.5rem;
+  }
+  .form-card h2 {
+    font-size: 1.5rem;
+  }
 }
-
-.primary-btn {
-  width: 100%;
-  padding: 1rem;
-  background: #000;
-  color: #fff;
-  border-radius: 12px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-}
-.error-msg { color: #ef4444; margin-top: 1rem; text-align: center; }
