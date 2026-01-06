@@ -3,6 +3,9 @@ import './LocationsInputs.css';
 
 const LocationPermission = () => {
   // Views: 'permission', 'home', 'trip_forms', 'deny_message'
+
+    const [traffic, setTraffic] = useState("UNKNOWN"); // default can be LOW, MEDIUM, HIGH, or UNKNOWN
+
   const [view, setView] = useState('permission');
 
   const handleAllow = () => {
@@ -137,6 +140,14 @@ const LocationPermission = () => {
           </div>
 
           <div className="form-content" style={{ marginTop: '30px', flex: 1 }}>
+            <input type="text" name="traffic" value={traffic} />
+
+    <div className="location-banner">
+      <div style={{ background: '#E8DBFF', padding: '10px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <span style={{ color: '#5D3E9F', fontSize: '1.2rem' }}> </span>
+      </div>
+      <span style={{ fontWeight: 'bold', marginLeft: '10px' }}>Location</span>
+    </div>
             {/* Urgency */}
             <div className="form-group">
               <label>How urgent is your trip?</label>

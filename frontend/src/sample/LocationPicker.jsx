@@ -13,7 +13,7 @@ export default function LocationPicker() {
   const [center, setCenter] = useState(DEFAULT_CENTER);
   const [userLocation, setUserLocation] = useState(null);
   const [result, setResult] = useState(null);
-const [showOverlay, setShowOverlay] = useState(false);
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const handleResultChange = ({ traffic, wait }) => {
   setResult((prev) => ({
@@ -22,7 +22,6 @@ const [showOverlay, setShowOverlay] = useState(false);
     wait,
   }));
 };
-
 
   // Ask for location on load
   useEffect(() => {

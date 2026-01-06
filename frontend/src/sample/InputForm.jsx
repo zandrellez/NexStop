@@ -1,9 +1,12 @@
 // src/components/InputForm.jsx
 import { useEffect, useState } from "react";
 
-export default function InputForm({ result, status, onChange }) {
+export default function InputForm({ result, status, onChange, onSubmit }) {
   const [traffic, setTraffic] = useState("");
   const [wait, setWait] = useState("");
+  const [urgency, setUrgency] = useState("");
+  const [weather, setWeather] = useState("");
+  const [budget, setBudget] = useState("");
 
   useEffect(() => {
     if (result) {
@@ -25,7 +28,7 @@ export default function InputForm({ result, status, onChange }) {
           value={traffic}
           onChange={(e) => {
             setTraffic(e.target.value);
-            onChange?.({ traffic: e.target.value, wait });
+            onChange?.({ traffic: e.target.value, wait, urgency, weather, budget });
           }}
           style={styles.input}
         >
@@ -42,14 +45,60 @@ export default function InputForm({ result, status, onChange }) {
           value={wait}
           onChange={(e) => {
             setWait(e.target.value);
-            onChange?.({ traffic, wait: e.target.value });
+            onChange?.({ traffic, wait: e.target.value, urgency, weather, budget });
           }}
           style={styles.input}
         />
 
-        <p style={styles.hint}>
-          You can manually override values here.
-        </p>
+        {/* Urgency */}
+        <label style={styles.label}>How urgent is your trip?</label>
+        <select
+          value={urgency}
+          onChange={(e) => setUrgency(e.target.value)}
+          style={styles.input}
+        >
+          <option value="">Select</option>
+          <option value="not_urgent">Not urgent</option>
+          <option value="somehow_urgent">Somehow urgent</option>
+          <option value="urgent">Urgent</option>
+        </select>
+
+        {/* Weather */}
+        <label style={styles.label}>Current Weather</label>
+        <select
+          value={weather}
+          onChange={(e) => setWeather(e.target.value)}
+          style={styles.input}
+        >
+          <option value="">Select</option>
+          <option value="clear">Clear</option>
+          <option value="gloomy">Gloomy</option>
+          <option value="rainy">Rainy</option>
+        </select>
+
+        {/* Budget */}
+        <label style={styles.label}>Budget Preference</label>
+        <select
+          value={budget}
+          onChange={(e) => setBudget(e.target.value)}
+          style={styles.input}
+        >
+          <option value="">Select</option>
+          <option value="low-cost">Low-cost</option>
+          <option value="balanced">Balanced</option>
+          <option value="comfort">Comfort</option>
+        </select>
+
+
+        {/* Submit Button */}
+        <button
+          style={styles.button}
+          onClick={() =>
+            onSubmit?.({ traffic, wait, urgency, weather, budget, corridor: result.corridor })
+          }
+        >
+          Wait
+        </button>
       </div>
     </div>
   );
@@ -57,26 +106,29 @@ export default function InputForm({ result, status, onChange }) {
 
 const styles = {
   overlay: {
-    position: "fixed",
-    inset: 0,
-    background: "rgba(0,0,0,0.6)",
-    backdropFilter: "blur(10px)",
-    WebkitBackdropFilter: "blur(10px)",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     zIndex: 2000,
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
+    paddingBottom: "10px", // Space from bottom
+    pointerEvents: "none", // allows map interaction outside card
   },
   card: {
     background: "rgba(255,255,255,0.95)",
     borderRadius: "16px",
-    padding: "2rem",
-    width: "90%",
+    padding: "1.5rem",
+    width: "95%",
     maxWidth: "420px",
     boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+    pointerEvents: "all", // allow clicks inside the card
+    display: "flex",
+    flexDirection: "column",
   },
   title: {
-    marginBottom: "1.5rem",
+    marginBottom: "1rem",
     textAlign: "center",
   },
   label: {
@@ -87,7 +139,7 @@ const styles = {
   input: {
     width: "100%",
     padding: "0.6rem",
-    marginBottom: "1.2rem",
+    marginBottom: "1rem",
     borderRadius: "8px",
     border: "1px solid #ccc",
     fontSize: "1rem",
@@ -96,5 +148,16 @@ const styles = {
     fontSize: "0.85rem",
     color: "#555",
     textAlign: "center",
+    marginBottom: "1rem",
+  },
+  button: {
+    padding: "12px",
+    backgroundColor: "#26C1E0",
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: "1rem",
+    borderRadius: "12px",
+    border: "none",
+    cursor: "pointer",
   },
 };
