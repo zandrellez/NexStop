@@ -7,8 +7,6 @@ const FeedbackScreen = () => {
   const handleSubmitFeedback = () => {
     console.log('Feedback:', { rating: feedbackRating, text: feedbackText });
     alert('Thank you for your feedback!');
-    // Navigate to home or next screen
-    // navigate('/home');
   };
 
   return (
@@ -41,7 +39,7 @@ const FeedbackScreen = () => {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           -webkit-font-smoothing: antialiased;
           -moz-osx-font-smoothing: grayscale;
-          padding: 40px 24px 32px 24px;
+          padding: 40px 40px 40px 40px;
         }
         
         .feedback-content {
@@ -49,6 +47,9 @@ const FeedbackScreen = () => {
           display: flex;
           flex-direction: column;
           align-items: center;
+          width: 100%;
+          max-width: 600px;
+          margin: 0 auto;
         }
         
         .feedback-title {
@@ -131,6 +132,7 @@ const FeedbackScreen = () => {
         
         .feedback-textarea {
           width: 100%;
+          max-width: 600px;
           min-height: 200px;
           padding: 16px;
           border: 1px solid #e0e0e0;
@@ -182,21 +184,20 @@ const FeedbackScreen = () => {
         
         @media (max-width: 768px) {
           .feedback-container {
-            max-width: 100vw;
+            padding: 40px 24px 32px 24px;
             padding-bottom: calc(32px + env(safe-area-inset-bottom));
-          }
-        }
-        
-        @media (min-width: 769px) {
-          .feedback-container {
-            max-width: 430px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
           }
         }
         
         @supports (padding: max(0px)) {
           .feedback-container {
-            padding-bottom: max(32px, env(safe-area-inset-bottom));
+            padding-bottom: max(40px, env(safe-area-inset-bottom));
+          }
+          
+          @media (max-width: 768px) {
+            .feedback-container {
+              padding-bottom: max(32px, env(safe-area-inset-bottom));
+            }
           }
         }
       `}</style>
