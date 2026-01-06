@@ -1,5 +1,6 @@
 // src/components/InputForm.jsx
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function InputForm({ result, status, onChange, onSubmit }) {
   const [traffic, setTraffic] = useState("");
@@ -7,6 +8,7 @@ export default function InputForm({ result, status, onChange, onSubmit }) {
   const [urgency, setUrgency] = useState("");
   const [weather, setWeather] = useState("");
   const [budget, setBudget] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (result) {
@@ -93,9 +95,10 @@ export default function InputForm({ result, status, onChange, onSubmit }) {
         {/* Submit Button */}
         <button
           style={styles.button}
-          onClick={() =>
-            onSubmit?.({ traffic, wait, urgency, weather, budget, corridor: result.corridor })
-          }
+          onClick={() => {
+            onSubmit?.({ traffic, wait, urgency, weather, budget, corridor: result.corridor });
+            navigate('/location-permission');
+          }}
         >
           Wait
         </button>

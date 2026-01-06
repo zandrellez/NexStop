@@ -55,7 +55,7 @@ const Signin = () => {
         if (isAdmin) {
           navigate('/admin/dashboard');
         } else {
-          navigate('/dashboard');
+          navigate('/home');
         }
       }
     } catch (error) {
@@ -65,7 +65,7 @@ const Signin = () => {
   }
 
   const handleGuestMode = () => {
-    navigate('/location-permission'); 
+    navigate('/home'); 
   };
 
   return (
