@@ -38,6 +38,7 @@ const Signup = () => {
         <div className="brand-content">
           <img src="/src/assets/NSLogo.png" alt="Logo" className="logo-img" />
           <h1 className="brand-title">NexStop</h1>
+          <p className="brand-tagline">Optimizing Your Commute</p>
         </div>
       </div>
 
