@@ -39,11 +39,11 @@ const WaitingScreen = () => {
           display: flex;
           flex-direction: column;
           height: 100vh;
-          height: 100dvh; /* Dynamic viewport height for mobile */
+          height: 100dvh;
           width: 100%;
           max-width: 100vw;
           margin: 0 auto;
-          backgroundColor: #f5f5f5;
+          background-color: #f5f5f5;
           position: fixed;
           top: 0;
           left: 0;
@@ -75,7 +75,7 @@ const WaitingScreen = () => {
           background-color: #ffffff;
           border-top-left-radius: 24px;
           border-top-right-radius: 24px;
-          padding: 24px 20px 32px 20px;
+          padding: 32px 40px 40px 40px;
           width: 100%;
           box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
           position: relative;
@@ -83,18 +83,18 @@ const WaitingScreen = () => {
         }
         
         .timer {
-          font-size: 32px;
+          font-size: 48px;
           font-weight: 700;
           color: #000000;
           line-height: 1.2;
           letter-spacing: -0.5px;
-          margin-bottom: 8px;
+          margin-bottom: 12px;
         }
         
         .description {
-          font-size: 14px;
+          font-size: 16px;
           color: #666666;
-          margin-bottom: 24px;
+          margin-bottom: 32px;
           line-height: 1.4;
         }
         
@@ -121,27 +121,32 @@ const WaitingScreen = () => {
         
         /* Mobile specific adjustments */
         @media (max-width: 768px) {
-          .waiting-container {
-            max-width: 100vw;
-          }
-          
           .bottom-card {
+            padding: 24px 20px 32px 20px;
             padding-bottom: calc(32px + env(safe-area-inset-bottom));
           }
-        }
-        
-        /* Desktop centered view */
-        @media (min-width: 769px) {
-          .waiting-container {
-            max-width: 430px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+          
+          .timer {
+            font-size: 32px;
+            margin-bottom: 8px;
+          }
+          
+          .description {
+            font-size: 14px;
+            margin-bottom: 24px;
           }
         }
         
         /* Handle notch/safe areas on iOS */
         @supports (padding: max(0px)) {
           .bottom-card {
-            padding-bottom: max(32px, env(safe-area-inset-bottom));
+            padding-bottom: max(40px, env(safe-area-inset-bottom));
+          }
+          
+          @media (max-width: 768px) {
+            .bottom-card {
+              padding-bottom: max(32px, env(safe-area-inset-bottom));
+            }
           }
         }
       `}</style>
@@ -160,7 +165,6 @@ const WaitingScreen = () => {
         </div>
 
         <div className="bottom-card">
-
           <div className="timer">
             {formatTime(seconds)}
           </div>
