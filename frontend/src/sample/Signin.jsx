@@ -15,6 +15,7 @@ const Signin = () => {
       const {
         success,
         data,
+        isAdmin, 
         error: signInError,
       } = await signInUser(email, password);
 
@@ -23,7 +24,11 @@ const Signin = () => {
       }
 
       if (success && data?.session) {
-        navigate('/dashboard'); 
+        if (isAdmin) {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/dashboard');
+        }
         return null;
       }
       
@@ -41,6 +46,7 @@ const Signin = () => {
       <div className="auth-brand-side">
         <div className="brand-content">
           <img src="/src/assets/NSLogo.png" alt="Logo" className="logo-img" />
+          <h1 className="brand-title">NexStop</h1>
         </div>
       </div>
       <div className="auth-form-side">
