@@ -27,7 +27,166 @@
   display: flex;
   justify-content: center;
 }
+/* Add to SignIn.css */
+.guest-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #e2e8f0; /* Light gray to distinguish from main Log In */
+  color: #1e293b;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
 
+.guest-btn:hover {
+  background: #cbd5e1;
+}
+
+.social-login {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Layout & Logo */
+.auth-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.auth-brand-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.logo-img {
+  width: 180px; /* Big logo fix */
+  height: auto;
+}
+
+.brand-title {
+  font-size: 3rem;
+  margin-top: 1rem;
+  color: #1e293b;
+  font-weight: 800;
+}
+
+/* Form Styling */
+.auth-form-side {
+  flex: 2;
+  background: linear-gradient(135deg, #e0f7fa 0%, #d1c4e9 100%);
+  border-radius: 40px 40px 0 0;
+  padding: 3rem 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* Divider Styling */
+.divider-container {
+  display: flex;
+  align-items: center;
+  margin: 25px 0;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background-color: #cbd5e1;
+}
+
+.divider-text {
+  padding: 0 10px;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
+/* Social Buttons Styling */
+.social-icons-row {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.social-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.social-btn:hover {
+  background: #f8fafc;
+}
+
+.social-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Primary & Guest Buttons */
+.primary-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #000;
+  color: #fff;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.guest-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #e2e8f0;
+  color: #1e293b;
+  border-radius: 12px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .auth-container { flex-direction: row; }
+  .auth-brand-side { flex: 1; }
+  .auth-form-side { 
+    flex: 1; 
+    border-radius: 60px 0 0 60px;
+    align-items: center;
+  }
+}
 /* Desktop Styles */
 @media (min-width: 768px) {
   .auth-container { flex-direction: row; }

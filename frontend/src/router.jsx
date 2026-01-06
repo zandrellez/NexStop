@@ -1,11 +1,15 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import Signin from './sample/Signin.jsx';
 import Signup from './sample/Signup.jsx';
 import RecommendForm from './sample/recommend_sample.jsx';
 
 export const router = createBrowserRouter([
   {
-    path: '/signin', 
+    path: '/',
+    element: <Navigate to="/signin" replace />,
+  },
+  {
+    path: '/signin',
     element: <Signin />,
   },
   {
@@ -23,5 +27,5 @@ export const router = createBrowserRouter([
   {
     path: '/admin/dashboard',
     element: <div><h1>Admin Dashboard</h1></div>,
-  }
+  },
 ]);
