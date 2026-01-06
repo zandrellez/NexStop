@@ -15,6 +15,7 @@ const Signin = () => {
           const {
             success,
             data,
+            isAdmin,
             error: signInError,
           } = await signInUser(email, password);
   
@@ -23,6 +24,10 @@ const Signin = () => {
           }
   
           if (success && data?.session) {
+            if (isAdmin) {
+              navigate('/admin/dashboard');
+              return null;
+            }
             navigate('/dashboard');
             return null;
           }
