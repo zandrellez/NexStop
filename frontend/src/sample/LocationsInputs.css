@@ -139,6 +139,13 @@
   margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
+.primary-btn:hover, .secondary-btn:hover {
+  opacity: 0.9;
+}
+
+=======
+>>>>>>> eee69ec2f7d54dd396d10c31d6d65fe3b2617121
 /* Input Form Styles */
 .custom-select {
   width: 100%;
