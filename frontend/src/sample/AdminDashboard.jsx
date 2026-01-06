@@ -1,7 +1,7 @@
 // src/components/Dashboard.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import supabase from '../supabase-client'; //
+import supabase from '../supabase-client';
 import './AdminDashboard.css';
 import logo from '../assets/NSLogo.png'; //
 
